@@ -3,20 +3,19 @@ import java.util.Scanner;
 public class Main {
     public static Key[] userArray = new Key[200];
     public static int size = 0;
-
     public static void main(String[] args) {
         Scanner console = new Scanner(System.in);
         while (true) {
             intro();
-            int findOrMake = console.nextInt();
-            if (findOrMake == 1) {
+            String findOrMake = console.next();
+            if (findOrMake.equals("1")) {
                 makePass(console);
-            }
-            if(findOrMake == 2) {
+            } else if(findOrMake.equals("2")) {
                 findUser(console);
-            }
-            else if (findOrMake == 3) {
+            } else if (findOrMake.equals("3")) {
                 overView();
+            } else {
+                errorMessage(findOrMake);
             }
             System.out.println();
         }
@@ -40,6 +39,7 @@ public class Main {
     }
 
     public static void findUser(Scanner console) {
+        boolean exist = false;
         System.out.print("Write your username to find password: ");
         String userName = console.next();
         for (int i = 0; i < size; i++) {
@@ -47,7 +47,12 @@ public class Main {
             if (userName.equals(key.getName())) {
                 System.out.print("Password: " + key.getPassword());
                 System.out.println();
+                exist = true;
             }
+        }
+        if (exist == false) {
+            System.out.print("The username \"" + userName + "\" does not exist.");
+            System.out.println();
         }
     }
 
@@ -61,5 +66,10 @@ public class Main {
             System.out.println(key.getPassword());
             System.out.println();
         }
+    }
+
+    public static void errorMessage(String findOrMake) {
+        System.out.print("You typed \"" + findOrMake + "\" which is not a option, please pick between 1, 2 or 3.");
+        System.out.println();
     }
 }
