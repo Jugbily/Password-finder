@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Main {
 
     public static Key[] userArray = new Key[200];
